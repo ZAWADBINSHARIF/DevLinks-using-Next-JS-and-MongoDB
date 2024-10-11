@@ -26,7 +26,7 @@ const MobilePreview = () => {
                                 <div className='h-3 w-[100px] bg-neutral-200 rounded-lg' />
                             </> :
                             <div className="flex flex-col items-center">
-                                <div className='rounded-full border-2 border-blue-600 overflow-hidden' >
+                                <div className='rounded-full border-2 border-indigo-700 overflow-hidden' >
                                     <Image
                                         src={Man}
                                         alt='profile picture'
@@ -60,7 +60,7 @@ const MobilePreview = () => {
                             <FaArrowRight color='white' />
                         </div>
 
-                        <div className='bg-blue-600 py-3 px-5 rounded-lg flex flex-row w-full items-center justify-between cursor-pointer'>
+                        <div className='bg-indigo-600 py-3 px-5 rounded-lg flex flex-row w-full items-center justify-between cursor-pointer'>
                             <div className='flex items-center gap-2'>
                                 <FaLinkedin size={18} color='white' />
                                 <span className='text-white'>Linkedin</span>

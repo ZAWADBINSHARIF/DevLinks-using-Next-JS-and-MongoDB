@@ -17,7 +17,7 @@ const Navbar = () => {
     return (
         <div className='flex my-5 bg-white rounded-lg px-3 py-3 justify-center items-center'>
             <div className='flex gap-2'>
-                <div className='bg-blue-700 rounded-xl flex justify-center items-center text-center px-2 py-1'>
+                <div className='bg-indigo-700 rounded-xl flex justify-center items-center text-center px-2 py-1'>
                     <FaLink size={18} color='white' />
                 </div>
                 <span className='font-semibold text-3xl text-black hidden md:block'>devlinks</span>
@@ -25,27 +25,27 @@ const Navbar = () => {
 
             <div className='flex flex-1 justify-center items-center gap-3'>
                 <Link
-                    className={`flex gap-2 justify-center items-center px-4 py-2 ${pathname === "/links" ? "bg-blue-700/20" : "bg-white"} rounded-lg cursor-pointer`}
+                    className={`flex gap-2 justify-center items-center px-4 py-2 ${pathname === "/links" ? "bg-indigo-700/20" : "bg-white"} rounded-lg cursor-pointer`}
                     href={"/links"}
                 >
-                    <FiLink className='text-blue-700' size={16} />
-                    <span className='text-blue-700 font-semibold text-sm hidden md:block'>Links</span>
+                    <FiLink className='text-indigo-700' size={16} />
+                    <span className='text-indigo-700 font-semibold text-sm hidden md:block'>Links</span>
                 </Link>
                 <Link
-                    className={`flex gap-2 justify-center items-center px-4 py-2 ${pathname === "/profile" ? "bg-blue-700/20" : "bg-white"} rounded-lg cursor-pointer`}
+                    className={`flex gap-2 justify-center items-center px-4 py-2 ${pathname === "/profile" ? "bg-indigo-700/20" : "bg-white"} rounded-lg cursor-pointer`}
                     href={"/profile"}
                 >
-                    <CgProfile className='text-blue-700' size={16} />
-                    <span className='text-blue-700 font-semibold text-sm hidden md:block'>Profile Details</span>
+                    <CgProfile className='text-indigo-700' size={16} />
+                    <span className='text-indigo-700 font-semibold text-sm hidden md:block'>Profile Details</span>
                 </Link>
             </div>
 
             <Link
-                className='px-5 py-2 border-blue-500 border-2 rounded-lg font-semibold text-blue-700 cursor-pointer hover:bg-blue-500 hover:text-white'
+                className='px-5 py-2 border-indigo-500 border-2 rounded-lg font-semibold text-indigo-700 cursor-pointer hover:bg-indigo-500 hover:text-white'
                 href={"/preview"}
             >
                 <span className='hidden md:block'>Preview</span>
-                <LuEye size={18} className='text-blue-700 md:hidden' />
+                <LuEye size={18} className='text-indigo-700 md:hidden' />
             </Link>
         </div>
     );

@@ -9,7 +9,7 @@ const page = () => {
             <div className='lg:flex w-2/5 bg-white rounded-lg px-5 py-8 justify-center items-center hidden'>
                 <MobilePreview />
             </div>
-            <div className='flex flex-1 bg-white rounded-lg px-5 py-8'>
+            <div className='flex flex-1 bg-white rounded-lg px-5 py-8 max-h-[730px]'>
                 <LinksForm />
             </div>
 
