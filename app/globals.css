@@ -82,3 +82,8 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.link-form {
+  overflow: hidden;
+  overflow-y: scroll !important;
+}

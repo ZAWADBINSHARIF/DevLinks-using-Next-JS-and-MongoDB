@@ -16,7 +16,7 @@ import { BsLink45Deg } from 'react-icons/bs';
 
 const LinksForm = () => {
     return (
-        <div className='w-full overflow-y-scroll'>
+        <div className='w-full overflow-y-scroll no-scrollbar'>
 
             <div className='space-y-3'>
                 <p className='text-3xl font-semibold'>Customize your links</p>
@@ -28,9 +28,9 @@ const LinksForm = () => {
                     +Add new link
                 </button>
 
-                <div className='pt-5 space-y-8 overflow-y-scroll'>
+                <div className='pt-5 space-y-8'>
 
-                    <div className='bg-neutral-300 px-3 py-4 space-y-2 rounded-lg'>
+                    <div className='bg-neutral-200 px-3 py-4 space-y-2 rounded-lg'>
 
                         <div className='flex flex-row justify-between'>
                             <div className='flex gap-1 items-center'>
