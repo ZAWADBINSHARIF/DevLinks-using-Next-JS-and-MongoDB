@@ -15,7 +15,7 @@ const Navbar = () => {
     console.log(pathname);
 
     return (
-        <div className='flex w-11/12 mx-auto my-5 bg-white rounded-lg px-3 py-3 justify-center items-center'>
+        <div className='flex my-5 bg-white rounded-lg px-3 py-3 justify-center items-center'>
             <div className='flex gap-2'>
                 <div className='bg-blue-700 rounded-xl flex justify-center items-center text-center px-2 py-1'>
                     <FaLink size={18} color='white' />
