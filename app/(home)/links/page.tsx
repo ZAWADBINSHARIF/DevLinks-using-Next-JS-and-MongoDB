@@ -9,12 +9,19 @@ const page = () => {
             <div className='lg:flex w-2/5 bg-white rounded-lg px-5 py-8 justify-center items-center hidden'>
                 <MobilePreview />
             </div>
-            <div className='flex flex-1 bg-white rounded-lg px-5 py-8 h-[730px] flex-col'>
+            <div className='flex flex-1 bg-white rounded-lg px-5 py-8 h-[730px] flex-col justify-between'>
+
                 <LinksForm />
-                <hr color='gray' />
-                <div className='self-end pt-5'>
-                    <button className='bg-indigo-700 px-5 py-2 text-white rounded-lg'>Save</button>
+
+                <div className='self-end'>
+                    <hr color='gray' />
+
+                    <div className='pt-5'>
+                        <button className='bg-indigo-700 px-5 py-2 text-white rounded-lg'>Save</button>
+                    </div>
+
                 </div>
+
             </div>
 
         </div>

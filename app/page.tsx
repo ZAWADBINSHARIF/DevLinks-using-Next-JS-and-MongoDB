@@ -7,7 +7,8 @@ const Home = () => {
 
     useEffect(() => {
         redirect("/links");
-    });
+    }, []);
+
     return (<></>);
 };
 
