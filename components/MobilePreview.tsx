@@ -35,7 +35,6 @@ const MobilePreview = () => {
                                         className='object-fill aspect-square'
                                     />
                                 </div>
-                                {/* <div className='w-[100px] h-[100px] bg-neutral-200 rounded-full' /> */}
                                 <p className='text-black font-bold text-center text-xl mt-3' >Ben Wright</p>
                                 <p className='text-black font-thin text-center' >ben@example.com</p>
                             </div>
