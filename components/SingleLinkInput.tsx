@@ -13,7 +13,7 @@ import {
 import { BsLink45Deg } from 'react-icons/bs';
 import { FaYoutube, FaLinkedin } from 'react-icons/fa';
 import { TbBrandGithubFilled } from 'react-icons/tb';
-import { PlatformName } from '@/interface';
+import { PlatformValue } from '@/interface';
 import useGlobalContext from '@/hooks/useGlobalContext';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from "@dnd-kit/utilities";
@@ -24,7 +24,7 @@ interface platformSelectOption {
     icon: React.ReactNode;
 }
 
-interface Props { id: number, name: PlatformName, link: string; index: number; }
+interface Props { id: number, name: PlatformValue, link: string; index: number; }
 
 const SingleLinkInput = ({ id, name, link, index }: Props) => {
 
@@ -54,7 +54,7 @@ const SingleLinkInput = ({ id, name, link, index }: Props) => {
     const { removeLink, addLinkValue, addPlatformValue } = useGlobalContext();
 
 
-    const [platformValue, setPlatformValue] = useState<PlatformName>("");
+    const [platformValue, setPlatformValue] = useState<PlatformValue>("");
     const [linkUrl, setLinkUrl] = useState("");
 
 
@@ -94,7 +94,7 @@ const SingleLinkInput = ({ id, name, link, index }: Props) => {
                     <Select
                         // defaultValue="github"
                         value={platformValue}
-                        onValueChange={(value: PlatformName) => {
+                        onValueChange={(value: PlatformValue) => {
                             setPlatformValue(value);
                             addPlatformValue(id, value);
                         }}

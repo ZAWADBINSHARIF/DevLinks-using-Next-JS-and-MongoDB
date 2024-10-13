@@ -1,7 +1,13 @@
-export interface linkDetail {
+export interface LinkDetail {
     id: number,
-    platFormName: PlatformName,
-    link: string;
+    platFormName: PlatformValue,
+    link: string,
 }
 
-export type PlatformName = "github" | "youtube" | "linkedin" | "";
+export type PlatformName = "github" | "youtube" | "linkedin";
+export type PlatformValue = PlatformName | "";
+
+export interface PlatformLinkItem {
+    name: string;
+    icon: JSX.Element;
+}

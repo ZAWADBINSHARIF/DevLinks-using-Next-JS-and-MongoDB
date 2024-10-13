@@ -1,17 +1,17 @@
 "use client";
 
 import React, { useState } from 'react';
-import { linkDetail, PlatformName } from "@/interface";
+import { LinkDetail, PlatformValue } from "@/interface";
 import { createContext } from "react";
 
 
 interface GlobalValues {
-    linkDetails: linkDetail[];
-    setLinkDetails: React.Dispatch<React.SetStateAction<linkDetail[]>>;
+    linkDetails: LinkDetail[];
+    setLinkDetails: React.Dispatch<React.SetStateAction<LinkDetail[]>>;
     addNewLinkHandle: () => void;
     removeLink: (id: number) => void;
     addLinkValue: (id: number, value: string) => void;
-    addPlatformValue: (id: number, value: PlatformName) => void;
+    addPlatformValue: (id: number, value: PlatformValue) => void;
 }
 
 export const GlobalContext = createContext<GlobalValues | null>(null);
@@ -19,7 +19,7 @@ export const GlobalContext = createContext<GlobalValues | null>(null);
 
 const GlobalValueProvider = ({ children }: { children: React.ReactNode; }) => {
 
-    const [linkDetails, setLinkDetails] = useState<linkDetail[]>([]);
+    const [linkDetails, setLinkDetails] = useState<LinkDetail[]>([]);
 
 
     const addNewLinkHandle = () => {
@@ -54,7 +54,7 @@ const GlobalValueProvider = ({ children }: { children: React.ReactNode; }) => {
         });
     };
 
-    const addPlatformValue = (id: number, value: PlatformName) => {
+    const addPlatformValue = (id: number, value: PlatformValue) => {
         setLinkDetails(prev => {
             return prev.map((item) => {
                 if (item.id === id) {

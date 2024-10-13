@@ -3,20 +3,24 @@
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import React from 'react';
-import { FaArrowRight, FaLinkedin, FaYoutube } from 'react-icons/fa';
-import { TbBrandGithubFilled } from 'react-icons/tb';
+import { FaArrowRight } from 'react-icons/fa';
 import Man from "@/assets/images/man.jpeg";
+import useGlobalContext from '@/hooks/useGlobalContext';
+import { LinkBgColor, PlatformLinkPreviewDetails } from '@/constant';
 
 
 const MobilePreview = () => {
 
     const pathname = usePathname();
 
+    const { linkDetails } = useGlobalContext();
+
+
     return (
         <div>
             <div className='phoneFrame flex justify-center pt-11 pb-6 px-12'>
 
-                <div className="flex flex-col w-full h-full text-white items-center pt-5">
+                <div className="flex flex-col w-full h-full text-white items-center pt-5 overflow-y-scroll no-scrollbar">
 
                     <div className='items-center flex flex-col gap-3'>
                         {pathname === "/links" ?
@@ -43,32 +47,45 @@ const MobilePreview = () => {
 
                     <div className='w-full px-4 pt-10 flex flex-col gap-5'>
 
-                        <div className='bg-black py-3 px-5 rounded-lg flex flex-row w-full items-center justify-between cursor-pointer'>
-                            <div className='flex items-center gap-2'>
-                                <TbBrandGithubFilled size={18} color='white' />
-                                <span className='text-white'>GitHub</span>
-                            </div>
-                            <FaArrowRight color='white' />
-                        </div>
+                        {linkDetails.map((item) => {
 
-                        <div className='bg-red-600 py-3 px-5 rounded-lg flex flex-row w-full items-center justify-between cursor-pointer'>
-                            <div className='flex items-center gap-2'>
-                                <FaYoutube size={18} color='white' />
-                                <span className='text-white'>YouTube</span>
-                            </div>
-                            <FaArrowRight color='white' />
-                        </div>
+                            if (item.platFormName == "") return <div key={item.id} className='bg-neutral-200 py-3 px-5 h-12 rounded-lg flex flex-row w-full items-center justify-between' />;
 
-                        <div className='bg-indigo-600 py-3 px-5 rounded-lg flex flex-row w-full items-center justify-between cursor-pointer'>
-                            <div className='flex items-center gap-2'>
-                                <FaLinkedin size={18} color='white' />
-                                <span className='text-white'>Linkedin</span>
-                            </div>
-                            <FaArrowRight color='white' />
-                        </div>
+                            const platformValue = item.platFormName;
+                            const PlatformIcon = () => PlatformLinkPreviewDetails[platformValue].icon;
+                            const PlatformName = PlatformLinkPreviewDetails[platformValue].name;
 
-                        {pathname === "/links" &&
+                            const handleCopyTheLink = () => {
+
+                                if(!item.link) return
+
+                                navigator.clipboard.writeText(item.link).then(() => {
+                                    alert('Text copied to clipboard!');
+                                }).catch(err => {
+                                    console.error('Failed to copy text: ', err);
+                                });
+                            }
+
+                            return (
+                                <div
+                                    key={item.id}
+                                    className={`${LinkBgColor[platformValue]} py-3 px-5 rounded-lg flex flex-row w-full items-center justify-between cursor-pointer`}
+                                    onClick={handleCopyTheLink}
+                                >
+                                    <div className='flex items-center gap-2'>
+                                        <PlatformIcon />
+                                        <span className='text-white'>{PlatformName}</span>
+                                    </div>
+                                    <FaArrowRight color='white' />
+                                </div>
+                            );
+                        })}
+
+                        {pathname === "/links" && linkDetails.length <= 0 &&
                             <>
+                                <div className='bg-neutral-200 py-3 px-5 h-12 rounded-lg flex flex-row w-full items-center justify-between' />
+                                <div className='bg-neutral-200 py-3 px-5 h-12 rounded-lg flex flex-row w-full items-center justify-between' />
+                                <div className='bg-neutral-200 py-3 px-5 h-12 rounded-lg flex flex-row w-full items-center justify-between' />
                                 <div className='bg-neutral-200 py-3 px-5 h-12 rounded-lg flex flex-row w-full items-center justify-between' />
                                 <div className='bg-neutral-200 py-3 px-5 h-12 rounded-lg flex flex-row w-full items-center justify-between' />
                             </>
@@ -80,7 +97,7 @@ const MobilePreview = () => {
                 </div>
 
             </div>
-        </div>
+        </div >
     );
 };
 
