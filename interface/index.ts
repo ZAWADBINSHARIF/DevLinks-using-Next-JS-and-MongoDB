@@ -10,4 +10,5 @@ export type PlatformValue = PlatformName | "";
 export interface PlatformLinkItem {
     name: string;
     icon: JSX.Element;
+    validation: (url: string) => boolean;
 }

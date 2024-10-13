@@ -17,11 +17,12 @@ import { PlatformValue } from '@/interface';
 import useGlobalContext from '@/hooks/useGlobalContext';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from "@dnd-kit/utilities";
+import { PlatformLinkPreviewDetails } from '@/constant';
 
 
 interface platformSelectOption {
     platformName: string,
-    icon: React.ReactNode;
+    icon: React.ReactElement;
 }
 
 interface Props { id: number, name: PlatformValue, link: string; index: number; }
@@ -51,11 +52,31 @@ const SingleLinkInput = ({ id, name, link, index }: Props) => {
     ] as const;
 
 
-    const { removeLink, addLinkValue, addPlatformValue } = useGlobalContext();
+    const { removeLink, addLinkValue, addPlatformValue, linkInputFormErrorIDs } = useGlobalContext();
 
 
     const [platformValue, setPlatformValue] = useState<PlatformValue>("");
     const [linkUrl, setLinkUrl] = useState("");
+    const [isValidUrl, setIsValidUrl] = useState(true);
+    const [platformSelectError, setPlatformSelectError] = useState(false);
+
+
+
+    useEffect(() => {
+
+        setIsValidUrl(true);
+        setPlatformSelectError(false);
+
+        if (linkInputFormErrorIDs.includes(id)) {
+            if (platformValue === "") {
+                setIsValidUrl(false);
+                setPlatformSelectError(true);
+                return;
+            }
+            setIsValidUrl(PlatformLinkPreviewDetails[platformValue].validation(linkUrl));
+        }
+
+    }, [id, linkInputFormErrorIDs, linkUrl, platformValue]);
 
 
     useEffect(() => {
@@ -65,12 +86,11 @@ const SingleLinkInput = ({ id, name, link, index }: Props) => {
             setLinkUrl(link);
     }, [name, link]);
 
-
     return (
         <div
             ref={setNodeRef}
             style={style}
-            className='bg-neutral-200 px-3 py-4 space-y-2 rounded-lg touch-none'>
+            className="bg-neutral-200 px-3 py-4 space-y-2 rounded-lg touch-none">
 
             <div className='flex flex-row justify-between'>
                 <div className='flex gap-1 items-center'>
@@ -99,7 +119,7 @@ const SingleLinkInput = ({ id, name, link, index }: Props) => {
                             addPlatformValue(id, value);
                         }}
                     >
-                        <SelectTrigger className="w-full focus:outline-none border-2 border-neutral-300 focus:ring-0">
+                        <SelectTrigger className={`w-full focus:outline-none ${platformSelectError ? "border-red-600" : "border-neutral-300"} border-2 focus:ring-0`}>
                             <SelectValue placeholder="Select a platform" />
                         </SelectTrigger>
                         <SelectContent>
@@ -131,17 +151,21 @@ const SingleLinkInput = ({ id, name, link, index }: Props) => {
                 <div className='space-y-1'>
 
                     <label htmlFor="link_input" className='text-sm'>Link</label>
-                    <div className='flex items-center px-3 rounded-lg border-2 border-gray-300 bg-white'>
+                    {!isValidUrl && <p className='p-0 m-0 text-sm text-red-700'>Invalid link</p>}
+                    <div className={`flex items-center px-3 rounded-lg border-2 ${isValidUrl ? "border-gray-300" : "border-red-700"} bg-white`}>
+
                         <BsLink45Deg size={18} className='text-neutral-800' />
+
                         <input value={linkUrl}
                             name='link'
                             id='link_input'
-                            className='w-full h-8 focus:outline-none px-3 text-gray-600 rounded-lg'
+                            className="w-full h-8 focus:outline-none px-3 text-gray-600 rounded-lg"
                             onChange={(e) => {
                                 setLinkUrl(e.target.value);
                                 addLinkValue(id, e.target.value);
                             }}
                         />
+
                     </div>
 
                 </div>

@@ -1,8 +1,37 @@
+"use client";
+
 import LinksForm from '@/components/LinksForm';
 import MobilePreview from '@/components/MobilePreview';
+import { PlatformLinkPreviewDetails } from '@/constant';
+import useGlobalContext from '@/hooks/useGlobalContext';
 import React from 'react';
 
-const page = () => {
+const Page = () => {
+
+    const { linkDetails, setLinkInputFormErrorIDs } = useGlobalContext();
+
+    const handleSaveLinks = () => {
+
+        const getEmptyInputLinkFormIDs: number[] = linkDetails.filter((item) => {
+            if (item.link === "" || item.platFormName === "") {
+                return item;
+            } else if (!PlatformLinkPreviewDetails[item.platFormName].validation(item.link)) {
+                return item;
+            }
+        }).map(item => item.id);
+
+        console.log(getEmptyInputLinkFormIDs);
+
+        if (getEmptyInputLinkFormIDs.length > 0) {
+            setLinkInputFormErrorIDs(getEmptyInputLinkFormIDs);
+            return;
+        }
+
+        // ** upload links
+
+    };
+
+
     return (
         <div className='flex flex-row gap-3'>
 
@@ -17,7 +46,10 @@ const page = () => {
                     <hr color='gray' />
 
                     <div className='pt-5'>
-                        <button className='bg-indigo-700 px-5 py-2 text-white rounded-lg'>Save</button>
+                        <button
+                            className='bg-indigo-700 px-5 py-2 text-white rounded-lg'
+                            onClick={handleSaveLinks}
+                        >Save</button>
                     </div>
 
                 </div>
@@ -28,4 +60,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

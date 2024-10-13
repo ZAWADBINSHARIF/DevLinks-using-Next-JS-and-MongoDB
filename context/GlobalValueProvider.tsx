@@ -8,6 +8,8 @@ import { createContext } from "react";
 interface GlobalValues {
     linkDetails: LinkDetail[];
     setLinkDetails: React.Dispatch<React.SetStateAction<LinkDetail[]>>;
+    linkInputFormErrorIDs: number[];
+    setLinkInputFormErrorIDs: React.Dispatch<React.SetStateAction<number[]>>;
     addNewLinkHandle: () => void;
     removeLink: (id: number) => void;
     addLinkValue: (id: number, value: string) => void;
@@ -20,6 +22,7 @@ export const GlobalContext = createContext<GlobalValues | null>(null);
 const GlobalValueProvider = ({ children }: { children: React.ReactNode; }) => {
 
     const [linkDetails, setLinkDetails] = useState<LinkDetail[]>([]);
+    const [linkInputFormErrorIDs, setLinkInputFormErrorIDs] = useState<number[]>([]);
 
 
     const addNewLinkHandle = () => {
@@ -46,7 +49,7 @@ const GlobalValueProvider = ({ children }: { children: React.ReactNode; }) => {
         setLinkDetails(prev => {
             return prev.map((item) => {
                 if (item.id === id) {
-                    return { ...item, link: value };
+                    return { ...item, link: value.trim() };
                 }
 
                 return item;
@@ -71,6 +74,8 @@ const GlobalValueProvider = ({ children }: { children: React.ReactNode; }) => {
             value={{
                 linkDetails,
                 setLinkDetails,
+                linkInputFormErrorIDs,
+                setLinkInputFormErrorIDs,
                 addNewLinkHandle,
                 removeLink,
                 addLinkValue,
