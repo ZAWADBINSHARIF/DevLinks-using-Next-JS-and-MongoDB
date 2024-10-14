@@ -7,6 +7,7 @@ import { FaArrowRight } from 'react-icons/fa';
 import Man from "@/assets/images/man.jpeg";
 import useGlobalContext from '@/hooks/useGlobalContext';
 import { LinkBgColor, PlatformLinkPreviewDetails } from '@/constant';
+import { toast } from 'sonner';
 
 
 const MobilePreview = () => {
@@ -62,13 +63,12 @@ const MobilePreview = () => {
 
 
                                 navigator.clipboard.writeText(item.link).then(() => {
-                                    alert('Text copied to clipboard!');
+                                    toast.success('Text copied to clipboard!');
                                 }).catch(err => {
                                     console.error('Failed to copy text: ', err);
                                 });
                             };
 
-                            // console.log(LinkBgColor[platformValue]);
                             return (
                                 <div
                                     key={item.id}

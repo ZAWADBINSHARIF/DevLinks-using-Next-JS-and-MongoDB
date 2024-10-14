@@ -8,6 +8,7 @@ import Man from '@/assets/images/man.jpeg';
 import Link from 'next/link';
 import useGlobalContext from '@/hooks/useGlobalContext';
 import { LinkBgColor, PlatformLinkPreviewDetails } from '@/constant';
+import { toast } from 'sonner';
 
 const Preview = () => {
 
@@ -75,7 +76,7 @@ const Preview = () => {
                                     if (!item.link) return;
 
                                     navigator.clipboard.writeText(item.link).then(() => {
-                                        alert('Text copied to clipboard!');
+                                        toast.success('Text copied to clipboard!');
                                     }).catch(err => {
                                         console.error('Failed to copy text: ', err);
                                     });

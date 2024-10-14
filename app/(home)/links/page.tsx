@@ -5,6 +5,7 @@ import MobilePreview from '@/components/MobilePreview';
 import { PlatformLinkPreviewDetails } from '@/constant';
 import useGlobalContext from '@/hooks/useGlobalContext';
 import React from 'react';
+import { toast } from 'sonner';
 
 const Page = () => {
 
@@ -24,11 +25,18 @@ const Page = () => {
 
         if (getEmptyInputLinkFormIDs.length > 0) {
             setLinkInputFormErrorIDs(getEmptyInputLinkFormIDs);
-            return;
+
+            toast.error("Some fields are empty. Please fill up the require input.", {
+                style: {
+                    backgroundColor: "red",
+                    color: "white"
+                },
+                duration: 3000
+            });
+
         }
 
         // ** upload links
-
     };
 
 
