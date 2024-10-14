@@ -1,4 +1,4 @@
-export interface LinkDetail {
+export interface DevLinkType {
     id: number,
     platFormName: PlatformValue,
     link: string,

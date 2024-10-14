@@ -1,13 +1,16 @@
 "use client";
 
-import React, { useState } from 'react';
-import { LinkDetail, PlatformValue } from "@/interface";
+import React, { useEffect, useState } from 'react';
+import { DevLinkType, PlatformValue } from "@/interface";
 import { createContext } from "react";
+import axios from 'axios';
 
 
 interface GlobalValues {
-    linkDetails: LinkDetail[];
-    setLinkDetails: React.Dispatch<React.SetStateAction<LinkDetail[]>>;
+    devLinksDatabaseID: string | null,
+    setDevLinksDatabaseID: React.Dispatch<React.SetStateAction<string | null>>;
+    devLinks: DevLinkType[];
+    setDevLinks: React.Dispatch<React.SetStateAction<DevLinkType[]>>;
     linkInputFormErrorIDs: number[];
     setLinkInputFormErrorIDs: React.Dispatch<React.SetStateAction<number[]>>;
     addNewLinkHandle: () => void;
@@ -21,15 +24,16 @@ export const GlobalContext = createContext<GlobalValues | null>(null);
 
 const GlobalValueProvider = ({ children }: { children: React.ReactNode; }) => {
 
-    const [linkDetails, setLinkDetails] = useState<LinkDetail[]>([]);
+    const [devLinks, setDevLinks] = useState<DevLinkType[]>([]);
     const [linkInputFormErrorIDs, setLinkInputFormErrorIDs] = useState<number[]>([]);
+    const [devLinksDatabaseID, setDevLinksDatabaseID] = useState<string | null>(null);
 
 
     const addNewLinkHandle = () => {
 
         const id = Math.floor(Math.random() * (99999999 - 100) + 100);
 
-        setLinkDetails(prev => {
+        setDevLinks(prev => {
             if (prev.length == 0) {
                 return [{ id, platFormName: "", link: "" }];
             }
@@ -39,14 +43,14 @@ const GlobalValueProvider = ({ children }: { children: React.ReactNode; }) => {
     };
 
     const removeLink = (id: number) => {
-        setLinkDetails(prev => {
+        setDevLinks(prev => {
             const newData = prev.filter(item => item.id != id);
             return newData;
         });
     };
 
     const addLinkValue = (id: number, value: string) => {
-        setLinkDetails(prev => {
+        setDevLinks(prev => {
             return prev.map((item) => {
                 if (item.id === id) {
                     return { ...item, link: value.trim() };
@@ -58,7 +62,7 @@ const GlobalValueProvider = ({ children }: { children: React.ReactNode; }) => {
     };
 
     const addPlatformValue = (id: number, value: PlatformValue) => {
-        setLinkDetails(prev => {
+        setDevLinks(prev => {
             return prev.map((item) => {
                 if (item.id === id) {
                     return { ...item, platFormName: value };
@@ -68,18 +72,43 @@ const GlobalValueProvider = ({ children }: { children: React.ReactNode; }) => {
             });
         });
     };
-    console.log(linkDetails);
+
+
+
+    useEffect(() => {
+
+        const fetchDevLinks = async () => {
+            try {
+                const response = await axios.get("http://localhost:3000/api/devlink");
+                console.log(response.data.devLinks);
+
+                setDevLinks(response.data.devLinks || []);
+                setDevLinksDatabaseID(response.data._id);
+                console.log(response.data._id);
+
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetchDevLinks();
+
+    }, []);
+
+
     return (
         <GlobalContext.Provider
             value={{
-                linkDetails,
-                setLinkDetails,
+                devLinks,
+                setDevLinks,
                 linkInputFormErrorIDs,
                 setLinkInputFormErrorIDs,
                 addNewLinkHandle,
                 removeLink,
                 addLinkValue,
-                addPlatformValue
+                addPlatformValue,
+                devLinksDatabaseID,
+                setDevLinksDatabaseID
             }}
         >
             {children}

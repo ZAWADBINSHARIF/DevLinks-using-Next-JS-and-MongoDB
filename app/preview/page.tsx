@@ -4,7 +4,7 @@ import React from 'react';
 import { FaArrowRight, FaShareAlt } from 'react-icons/fa';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import Image from 'next/image';
-import Man from '@/assets/images/man.jpeg';
+import Avatar from '@/assets/images/avatar.png';
 import Link from 'next/link';
 import useGlobalContext from '@/hooks/useGlobalContext';
 import { LinkBgColor, PlatformLinkPreviewDetails } from '@/constant';
@@ -12,7 +12,7 @@ import { toast } from 'sonner';
 
 const Preview = () => {
 
-    const { linkDetails } = useGlobalContext();
+    const { devLinks } = useGlobalContext();
 
 
     return (
@@ -47,7 +47,7 @@ const Preview = () => {
                             <div className="flex flex-col items-center">
                                 <div className='rounded-full border-2 border-indigo-700 overflow-hidden' >
                                     <Image
-                                        src={Man}
+                                        src={Avatar}
                                         alt='profile picture'
                                         width={100}
                                         height={100}
@@ -63,7 +63,7 @@ const Preview = () => {
                         <div className='w-full px-4 pt-10 flex flex-col gap-5'>
 
 
-                            {linkDetails.map((item) => {
+                            {devLinks.map((item) => {
 
                                 if (item.platFormName == "") return <div key={item.id} className='bg-neutral-200 py-3 px-5 h-12 rounded-lg flex flex-row w-full items-center justify-between' />;
 

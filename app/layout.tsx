@@ -4,6 +4,7 @@ import GlobalValueProvider from "@/context/GlobalValueProvider";
 import { Toaster } from 'sonner';
 import "./globals.css";
 
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -25,6 +26,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
     <html lang="en">
       <body

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
-import Man from "@/assets/images/man.jpeg";
+import Avatar from "@/assets/images/avatar.png";
 import useGlobalContext from '@/hooks/useGlobalContext';
 import { LinkBgColor, PlatformLinkPreviewDetails } from '@/constant';
 import { toast } from 'sonner';
@@ -14,7 +14,7 @@ const MobilePreview = () => {
 
     const pathname = usePathname();
 
-    const { linkDetails } = useGlobalContext();
+    const { devLinks } = useGlobalContext();
 
 
     return (
@@ -33,7 +33,7 @@ const MobilePreview = () => {
                             <div className="flex flex-col items-center">
                                 <div className='rounded-full border-2 border-indigo-700 overflow-hidden' >
                                     <Image
-                                        src={Man}
+                                        src={Avatar}
                                         alt='profile picture'
                                         width={100}
                                         height={100}
@@ -48,7 +48,7 @@ const MobilePreview = () => {
 
                     <div className='w-full px-4 pt-10 flex flex-col gap-5'>
 
-                        {linkDetails.map((item) => {
+                        {devLinks.map((item) => {
 
                             if (item.platFormName == "") return <div key={item.id} className='bg-neutral-200 py-3 px-5 h-12 rounded-lg flex flex-row w-full items-center justify-between' />;
 
@@ -84,7 +84,7 @@ const MobilePreview = () => {
                             );
                         })}
 
-                        {pathname === "/links" && linkDetails.length <= 0 &&
+                        {pathname === "/links" && devLinks.length <= 0 &&
                             <>
                                 <div className='bg-neutral-200 py-3 px-5 h-12 rounded-lg flex flex-row w-full items-center justify-between' />
                                 <div className='bg-neutral-200 py-3 px-5 h-12 rounded-lg flex flex-row w-full items-center justify-between' />

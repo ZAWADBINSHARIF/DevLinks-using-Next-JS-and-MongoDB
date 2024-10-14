@@ -7,10 +7,10 @@ import LinksListForm from './LinksListForm';
 
 const LinksForm = () => {
 
-    const { linkDetails, addNewLinkHandle } = useGlobalContext();
+    const { devLinks, addNewLinkHandle } = useGlobalContext();
 
     return (
-        <div className={`w-full overflow-y-scroll h-full no-scrollbar ${linkDetails.length > 2 ? "shadow-lg" : ""}`}>
+        <div className={`w-full overflow-y-scroll h-full no-scrollbar ${devLinks.length > 2 ? "shadow-lg" : ""}`}>
 
             <div className='space-y-3'>
                 <p className='text-3xl font-semibold'>Customize your links</p>

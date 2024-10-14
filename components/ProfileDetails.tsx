@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import Man from "@/assets/images/man.jpeg";
+import Avatar from "@/assets/images/avatar.png";
 import Img from 'next/image';
 import { FaRegImage } from 'react-icons/fa';
 
@@ -93,7 +93,7 @@ const ProfileDetails = () => {
                             onMouseLeave={() => setImageChangeShow(false)}
                         >
                             <Img
-                                src={previewImage ? previewImage : Man}
+                                src={previewImage ? previewImage : Avatar}
                                 alt='Profile picture'
                                 width={200}
                                 height={200}
