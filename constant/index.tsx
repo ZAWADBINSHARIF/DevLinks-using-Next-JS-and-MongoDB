@@ -6,7 +6,7 @@ import { TbBrandGithubFilled } from "react-icons/tb";
 export enum LinkBgColor {
     github = "bg-black",
     youtube = "bg-red-600",
-    linkedin = "bg-indigo-600"
+    linkedin = "bg-blue-600"
 }
 
 export const PlatformLinkPreviewDetails: Record<PlatformName, PlatformLinkItem> = {

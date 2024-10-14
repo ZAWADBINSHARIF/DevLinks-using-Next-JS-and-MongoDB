@@ -54,22 +54,25 @@ const MobilePreview = () => {
                             const platformValue = item.platFormName;
                             const PlatformIcon = () => PlatformLinkPreviewDetails[platformValue].icon;
                             const PlatformName = PlatformLinkPreviewDetails[platformValue].name;
+                            const bgColor = LinkBgColor[platformValue];
 
                             const handleCopyTheLink = () => {
 
-                                if(!item.link) return
+                                if (!item.link) return;
+
 
                                 navigator.clipboard.writeText(item.link).then(() => {
                                     alert('Text copied to clipboard!');
                                 }).catch(err => {
                                     console.error('Failed to copy text: ', err);
                                 });
-                            }
+                            };
 
+                            // console.log(LinkBgColor[platformValue]);
                             return (
                                 <div
                                     key={item.id}
-                                    className={`${LinkBgColor[platformValue]} py-3 px-5 rounded-lg flex flex-row w-full items-center justify-between cursor-pointer`}
+                                    className={`${bgColor} py-3 px-5 rounded-lg flex flex-row w-full items-center justify-between cursor-pointer`}
                                     onClick={handleCopyTheLink}
                                 >
                                     <div className='flex items-center gap-2'>
