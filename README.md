@@ -1,9 +1,25 @@
 ## Short list
 - [Short list](#short-list)
+- [How to setup and start the project](#how-to-setup-and-start-the-project)
 - [Video of the website](#video-of-the-website)
 - [Images of website](#images-of-website)
-- [How to setup](#how-to-setup)
-- [Getting Started](#getting-started)
+
+
+
+## How to setup and start the project
+After downloading github files, goto the project folder and run a command for install all package:
+
+```bash
+npm i
+```
+
+Now, run the development server:
+```bash
+npm run dev
+```
+
+<b>Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.</b>
+
 
 
 ## Video of the website
@@ -17,30 +33,3 @@
 ![Links sm page](./github/4.png)
 ![profile sm page](./github/5.png)
 ![Preview sm page](./github/6.png)
-
-
-## How to setup
-
-
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
