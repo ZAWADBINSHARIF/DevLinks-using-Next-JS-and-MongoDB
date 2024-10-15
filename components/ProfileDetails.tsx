@@ -1,15 +1,21 @@
 'use client';
 
-import React, { useState } from 'react';
-import Avatar from "@/assets/images/avatar.png";
+import React, { useEffect, useState } from 'react';
+import Avatar from "@/assets/images/avatar.jpg";
 import Img from 'next/image';
 import { FaRegImage } from 'react-icons/fa';
+import { toast } from 'sonner';
+import axios from 'axios';
+import useGlobalContext from '@/hooks/useGlobalContext';
 
 const ProfileDetails = () => {
 
+    const { profileDatabaseID, setProfileDatabaseID } = useGlobalContext();
+
+
     const [imageChangeShow, setImageChangeShow] = useState(false);
 
-    const [profile_picture, set_profile_picture] = useState<File | string>("");
+    // const [profile_picture, set_profile_picture] = useState<File | null>(null);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -57,19 +63,102 @@ const ProfileDetails = () => {
 
             reader.readAsDataURL(files[0]);
 
-            set_profile_picture(files[0]);
+            // set_profile_picture(files[0]);
         }
 
     };
 
-    const handleSaveProfile = () => {
-
+    const handleSaveProfile = async () => {
 
         setShowInputError(false);
+
         if (!firstName || !lastName || !email) {
             setShowInputError(true);
+            return;
         }
+
+        try {
+
+            const formData = new FormData();
+
+            formData.append("firstName", firstName);
+            formData.append("lastName", lastName);
+            formData.append("email", email);
+
+
+            if (profileDatabaseID) {
+
+                formData.append("_id", profileDatabaseID);
+
+                const response = await axios.put("/api/user", formData);
+                console.log(response);
+
+
+            } else {
+                const response = await axios.post("/api/user", formData);
+                if (response?.data?._id)
+                    setProfileDatabaseID(response?.data?._id);
+                else
+                    setProfileDatabaseID(null);
+                console.log(response);
+            }
+
+            toast.success("Profile has been saved");
+
+        } catch (error) {
+            toast.error("Something went wrong", {
+                style: {
+                    backgroundColor: "red",
+                    color: "white"
+                }
+            });
+            console.log(error);
+        }
+
+
     };
+
+
+
+    useEffect(() => {
+        if (previewImage) {
+            toast.warning("Image can't be saved, I clound not have much time to develop this feature. 🤒");
+        }
+    }, [previewImage]);
+
+
+    useEffect(() => {
+
+        const fetchProfileDetails = async () => {
+            try {
+
+                const response = await axios.get("/api/user");
+
+                setFirstName(response.data.firstName);
+                setLastName(response.data.lastName);
+                setEmail(response.data.email);
+                if (response?.data?._id)
+                    setProfileDatabaseID(response?.data?._id);
+                else
+                    setProfileDatabaseID(null);
+
+
+            } catch (error) {
+                toast.error("Something went wrong", {
+                    style: {
+                        background: "red",
+                        color: "white"
+                    }
+                });
+                console.log(error);
+            }
+
+        };
+
+        fetchProfileDetails();
+
+    }, [setProfileDatabaseID]);
+
 
     return (
         <div className='w-full flex flex-col'>

@@ -7,6 +7,8 @@ import axios from 'axios';
 
 
 interface GlobalValues {
+    profileDatabaseID: string | null,
+    setProfileDatabaseID: React.Dispatch<React.SetStateAction<string | null>>;
     devLinksDatabaseID: string | null,
     setDevLinksDatabaseID: React.Dispatch<React.SetStateAction<string | null>>;
     devLinks: DevLinkType[];
@@ -27,6 +29,7 @@ const GlobalValueProvider = ({ children }: { children: React.ReactNode; }) => {
     const [devLinks, setDevLinks] = useState<DevLinkType[]>([]);
     const [linkInputFormErrorIDs, setLinkInputFormErrorIDs] = useState<number[]>([]);
     const [devLinksDatabaseID, setDevLinksDatabaseID] = useState<string | null>(null);
+    const [profileDatabaseID, setProfileDatabaseID] = useState<string | null>(null);
 
 
     const addNewLinkHandle = () => {
@@ -99,6 +102,8 @@ const GlobalValueProvider = ({ children }: { children: React.ReactNode; }) => {
     return (
         <GlobalContext.Provider
             value={{
+                profileDatabaseID,
+                setProfileDatabaseID,
                 devLinks,
                 setDevLinks,
                 linkInputFormErrorIDs,

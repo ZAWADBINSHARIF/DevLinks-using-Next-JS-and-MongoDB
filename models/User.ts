@@ -3,13 +3,12 @@ import mongoose from "mongoose";
 
 
 const userSchema = new mongoose.Schema({
-    profile_img: String,
-    firstname: String,
-    lastname: String,
+    firstName: String,
+    lastName: String,
     email: String
 });
 
 
-const User = mongoose.models.users || mongoose.model("user", userSchema);
+const User = mongoose.models.user || mongoose.model("user", userSchema);
 
 export default User;

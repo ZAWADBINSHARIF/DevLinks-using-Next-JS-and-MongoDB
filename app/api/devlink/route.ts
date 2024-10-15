@@ -41,8 +41,27 @@ export async function POST(req: Request) {
 
         return NextResponse.json({ message: 'Dev links has been saved', _id: newDevLinks._id });
     } catch (error) {
-        console.error('Error processing request:', error);
-        return NextResponse.json({ message: 'Error', error: error?.message }, { status: 500 });
+        if (error instanceof Error) {
+            console.log(error);
+            return NextResponse.json(
+                {
+                    error: error.message,
+                },
+                {
+                    status: 500,
+                }
+            );
+        } else {
+            console.log('An unknown error occurred');
+            return NextResponse.json(
+                {
+                    error: 'An unknown error occurred',
+                },
+                {
+                    status: 500
+                }
+            );
+        }
     }
 }
 
@@ -66,8 +85,27 @@ export async function PUT(req: Request) {
 
         return NextResponse.json({ message: 'Dev links has been saved' });
     } catch (error) {
-        console.error('Error processing request:', error);
-        return NextResponse.json({ message: 'Error', error: error?.message }, { status: 500 });
+        if (error instanceof Error) {
+            console.log(error);
+            return NextResponse.json(
+                {
+                    error: error.message,
+                },
+                {
+                    status: 500,
+                }
+            );
+        } else {
+            console.log('An unknown error occurred');
+            return NextResponse.json(
+                {
+                    error: 'An unknown error occurred',
+                },
+                {
+                    status: 500
+                }
+            );
+        }
     }
 }
 

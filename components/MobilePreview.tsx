@@ -2,12 +2,13 @@
 
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaArrowRight } from 'react-icons/fa';
-import Avatar from "@/assets/images/avatar.png";
+import Avatar from "@/assets/images/avatar.jpg";
 import useGlobalContext from '@/hooks/useGlobalContext';
 import { LinkBgColor, PlatformLinkPreviewDetails } from '@/constant';
 import { toast } from 'sonner';
+import axios from 'axios';
 
 
 const MobilePreview = () => {
@@ -15,6 +16,35 @@ const MobilePreview = () => {
     const pathname = usePathname();
 
     const { devLinks } = useGlobalContext();
+
+    const [firstName, setFirstName] = useState("");
+    const [email, setEmail] = useState("");
+
+
+    useEffect(() => {
+        const fetchProfileDetails = async () => {
+            try {
+
+                const response = await axios.get("/api/user");
+
+                setFirstName(response.data.firstName);
+                setEmail(response.data.email);
+
+
+            } catch (error) {
+                toast.error("Something went wrong", {
+                    style: {
+                        background: "red",
+                        color: "white"
+                    }
+                });
+                console.log(error);
+            }
+
+        };
+
+        fetchProfileDetails();
+    }, []);
 
 
     return (
@@ -40,8 +70,8 @@ const MobilePreview = () => {
                                         className='object-fill aspect-square'
                                     />
                                 </div>
-                                <p className='text-black font-bold text-center text-xl mt-3' >Ben Wright</p>
-                                <p className='text-black font-thin text-center' >ben@example.com</p>
+                                <p className='text-black font-bold text-center text-xl mt-3' >{firstName}</p>
+                                <p className='text-black font-thin text-center' >{email}</p>
                             </div>
                         }
                     </div>
